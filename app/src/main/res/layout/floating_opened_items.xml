@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayoutMain"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layout_background">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            style="@style/Buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutExit"
+            app:layout_constraintStart_toEndOf="@+id/linearLayoutExit"
+            app:layout_constraintTop_toTopOf="@+id/linearLayoutExit">
+
+            <ImageView
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="2"
+                android:adjustViewBounds="true"
+                android:src="@android:drawable/ic_menu_camera"
+                android:text="Button" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:text="@string/camera" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            style="@style/Buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayoutExit"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayoutExit"
+            app:layout_constraintStart_toStartOf="@+id/linearLayoutExit">
+
+            <ImageView
+                android:id="@+id/button2"
+                style="@style/Buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:adjustViewBounds="true"
+                android:src="@android:drawable/sym_action_email"
+                android:text="Button" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:text="@string/messages" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayoutExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout1"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <ImageView
+                android:id="@+id/imageViewExit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:cropToPadding="false"
+                android:minWidth="50dp"
+                android:minHeight="50dp"
+                android:src="@android:drawable/radiobutton_off_background"
+                android:text="Button" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            style="@style/Buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutExit"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayoutExit"
+            app:layout_constraintTop_toTopOf="@+id/linearLayoutExit">
+
+            <ImageView
+                android:id="@+id/button4"
+                style="@style/Buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:adjustViewBounds="true"
+                android:src="@android:drawable/ic_menu_call"
+                android:text="Button" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:text="@string/call" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            style="@style/Buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayoutExit"
+            app:layout_constraintStart_toStartOf="@+id/linearLayoutExit"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutExit">
+
+            <ImageView
+                android:id="@+id/button5"
+                style="@style/Buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_menu_home"
+                android:text="Button" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:text="@string/home" />
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

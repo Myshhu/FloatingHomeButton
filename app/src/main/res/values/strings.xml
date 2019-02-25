@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FloatingHomeButton</string>
+    <string name="messages">Messages</string>
+    <string name="back">Back</string>
+    <string name="call">Call</string>
+    <string name="home">Home</string>
+    <string name="camera">Camera</string>
+</resources>
