@@ -9,4 +9,5 @@
         android:startColor="#132666"
         android:endColor="#A1caff"
         android:type="linear" />
+    <!--android:gradientRadius="70%"-->
 </shape>

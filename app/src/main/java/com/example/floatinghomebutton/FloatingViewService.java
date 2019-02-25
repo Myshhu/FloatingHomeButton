@@ -19,7 +19,7 @@ public class FloatingViewService extends Service {
 
     private WindowManager mWindowManager;
     private View floatingView;
-    boolean isViewExpanded = true;
+    boolean isViewExpanded = false;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -45,7 +45,7 @@ public class FloatingViewService extends Service {
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 LAYOUT_FLAG,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 PixelFormat.TRANSLUCENT);
 
         //Specify the view position
@@ -57,6 +57,7 @@ public class FloatingViewService extends Service {
         mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         mWindowManager.addView(floatingView, params);
 
+        foldLayout();
 
         LinearLayout linearLayout1 = floatingView.findViewById(R.id.linearLayout1);
         linearLayout1.setOnClickListener(
@@ -97,7 +98,7 @@ public class FloatingViewService extends Service {
         );
 
         //Move view around screen
-        floatingView.findViewById(R.id.linearLayoutExit).setOnTouchListener(new View.OnTouchListener() {
+        floatingView.findViewById(R.id.imageViewExit).setOnTouchListener(new View.OnTouchListener() {
             private int initialX;
             private int initialY;
             private float initialTouchX;
@@ -114,7 +115,6 @@ public class FloatingViewService extends Service {
                         //Remember the initial position.
                         initialX = params.x;
                         initialY = params.y;
-
                         startTime = System.currentTimeMillis();
 
                         //Get the touch location
@@ -170,25 +170,49 @@ public class FloatingViewService extends Service {
     }
 
     private void foldLayout() {
+        LinearLayout linearLayoutMain = floatingView.findViewById(R.id.linearLayoutMain);
+        linearLayoutMain.animate().scaleX(0.3f);
+        linearLayoutMain.animate().scaleY(0.3f);
+
         LinearLayout linearLayout1 = floatingView.findViewById(R.id.linearLayout1);
-        linearLayout1.setVisibility(View.GONE);
+        linearLayout1.animate().alpha(0.0f);
+        //linearLayout1.setVisibility(View.GONE);
         LinearLayout linearLayout2 = floatingView.findViewById(R.id.linearLayout2);
-        linearLayout2.setVisibility(View.GONE);
+        linearLayout2.animate().alpha(0.0f);
+        //linearLayout2.setVisibility(View.GONE);
+        LinearLayout linearLayoutExit = floatingView.findViewById(R.id.linearLayoutExit);
+        linearLayoutExit.animate().scaleX(2.5f);
+        linearLayoutExit.animate().scaleY(2.5f);
+        //linearLayoutExit.setVisibility(View.GONE);
         LinearLayout linearLayout4 = floatingView.findViewById(R.id.linearLayout4);
-        linearLayout4.setVisibility(View.GONE);
+        linearLayout4.animate().alpha(0.0f);
+        //linearLayout4.setVisibility(View.GONE);
         LinearLayout linearLayout5 = floatingView.findViewById(R.id.linearLayout5);
-        linearLayout5.setVisibility(View.GONE);
+        linearLayout5.animate().alpha(0.0f);
+        //linearLayout5.setVisibility(View.GONE);
     }
 
     private void expandLayout() {
+        LinearLayout linearLayoutMain = floatingView.findViewById(R.id.linearLayoutMain);
+        linearLayoutMain.animate().scaleX(1.0f);
+        linearLayoutMain.animate().scaleY(1.0f);
+
         LinearLayout linearLayout1 = floatingView.findViewById(R.id.linearLayout1);
-        linearLayout1.setVisibility(View.VISIBLE);
+        linearLayout1.animate().alpha(1.0f);
+        //linearLayout1.setVisibility(View.VISIBLE);
         LinearLayout linearLayout2 = floatingView.findViewById(R.id.linearLayout2);
-        linearLayout2.setVisibility(View.VISIBLE);
+        linearLayout2.animate().alpha(1.0f);
+        //linearLayout2.setVisibility(View.VISIBLE);
+        LinearLayout linearLayoutExit = floatingView.findViewById(R.id.linearLayoutExit);
+        linearLayoutExit.animate().scaleX(1.0f);
+        linearLayoutExit.animate().scaleY(1.0f);
+        //linearLayoutExit.setVisibility(View.VISIBLE);
         LinearLayout linearLayout4 = floatingView.findViewById(R.id.linearLayout4);
-        linearLayout4.setVisibility(View.VISIBLE);
+        linearLayout4.animate().alpha(1.0f);
+        //linearLayout4.setVisibility(View.VISIBLE);
         LinearLayout linearLayout5 = floatingView.findViewById(R.id.linearLayout5);
-        linearLayout5.setVisibility(View.VISIBLE);
+        linearLayout5.animate().alpha(1.0f);
+        //linearLayout5.setVisibility(View.VISIBLE);
     }
 
     @Override
