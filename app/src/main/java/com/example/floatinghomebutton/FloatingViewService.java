@@ -11,8 +11,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.LinearLayout;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class FloatingViewService extends Service {
@@ -105,6 +106,7 @@ public class FloatingViewService extends Service {
             private float initialTouchY;
             double deltaTime, startTime;
             boolean moved = false;
+            boolean animating = false;
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -128,7 +130,7 @@ public class FloatingViewService extends Service {
 
                         //The check for Xdiff <10 && YDiff< 10 because sometime elements moves a little while clicking.
                         if (XDiff < 10 && YDiff < 10) {
-                            if(isViewExpanded) {
+                            if (isViewExpanded) {
                                 foldLayout();
                             } else {
                                 expandLayout();
@@ -152,7 +154,24 @@ public class FloatingViewService extends Service {
 
                 deltaTime = (System.currentTimeMillis() - startTime);
                 if (deltaTime > 500 && !moved) {
-                    stopSelf();
+                    System.out.println("Called animation");
+                    if (!animating) {
+                        animating = true;
+                        floatingView.findViewById(R.id.imageViewExit).performClick();
+                        LinearLayout linearLayoutMain = floatingView.findViewById(R.id.linearLayoutMain);
+                        linearLayoutMain.animate().scaleX(0.0f);
+                        linearLayoutMain.animate().scaleY(0.0f);
+                    }
+
+                    new Thread(() -> {
+                        try {
+                            TimeUnit.MILLISECONDS.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        stopSelf();
+                    }).start();
+
                 } else {
                     System.out.println("Not moving, deltaTime: " + deltaTime + " moved: " + moved);
                 }
@@ -171,8 +190,8 @@ public class FloatingViewService extends Service {
 
     private void foldLayout() {
         LinearLayout linearLayoutMain = floatingView.findViewById(R.id.linearLayoutMain);
-        linearLayoutMain.animate().scaleX(0.3f);
-        linearLayoutMain.animate().scaleY(0.3f);
+        linearLayoutMain.animate().scaleX(0.4f);
+        linearLayoutMain.animate().scaleY(0.4f);
 
         LinearLayout linearLayout1 = floatingView.findViewById(R.id.linearLayout1);
         linearLayout1.animate().alpha(0.0f);
