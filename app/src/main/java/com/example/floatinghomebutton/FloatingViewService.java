@@ -1,6 +1,7 @@
 package com.example.floatinghomebutton;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 
 import java.util.concurrent.TimeUnit;
@@ -72,10 +74,21 @@ public class FloatingViewService extends Service {
         LinearLayout linearLayout2 = floatingView.findViewById(R.id.linearLayout2);
         linearLayout2.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    /*Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse("sms:"));
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
+                    */
+                    InputMethodManager imm = (InputMethodManager)   getSystemService(Context.INPUT_METHOD_SERVICE);
+                    /*EditText et = floatingView.findViewById(R.id.editText);
+                    ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE))
+                            .showSoftInput(et, InputMethodManager.SHOW_FORCED);*/
+                    //imm.setInputMethod(et.getWindowToken(), );
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+                    //imm.showSoftInputFromInputMethod(et.getWindowToken(), InputMethodManager.SHOW_FORCED);
+
+                    params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
+                    mWindowManager.updateViewLayout(floatingView, params);
                 }
         );
 
